@@ -1,0 +1,10 @@
+/* ==========================================================================
+   cURL Builder Main Stylesheet Aggregator
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@import './variables.css';
+@import './layout.css';
+@import './components.css';
+@import './terminal.css';

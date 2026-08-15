@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cURL 命令生成器 (cURL Builder) - 基于 cURL Man Page 规范的现代化开发者工具</title>
+  <meta name="description" content="纯前端、开箱即用的 cURL 命令可视化生成器。支持 HTTP 请求参数、Headers、JSON/Form-Data/UrlEncoded Body、多种认证方式及 280+ cURL Man Page 高级参数速查，实时生成 Bash、PowerShell、Windows CMD 跨平台命令。">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-root">
+    <!-- Top Global Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="brand-icon">&gt;_</div>
+        <div class="brand-title-group">
+          <h1 class="brand-title">cURL Builder</h1>
+          <span class="brand-badge">Man Page v8.x</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="btn btn-sm btn-ghost" id="load-sample-btn" title="加载典型 API 示例">
+          <span>✨ 示例请求</span>
+        </button>
+        <button type="button" class="btn btn-sm btn-ghost" id="reset-btn" title="清空所有配置项">
+          <span>🗑️ 重置清空</span>
+        </button>
+        <button type="button" class="btn btn-sm btn-icon btn-ghost" id="theme-toggle-btn" title="切换暗色/明亮模式">
+          ☀️
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="app-workspace">
+      <!-- Left Panel: Request Configuration & Man Page Flags -->
+      <section class="builder-panel" aria-label="请求参数配置区">
+        <!-- Top Bar: Method Selector & URL Bar -->
+        <div class="builder-top-bar">
+          <div class="request-bar-group">
+            <div class="method-select-wrap">
+              <select id="method-select" class="method-select" aria-label="HTTP Method">
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+                <option value="PATCH">PATCH</option>
+                <option value="HEAD">HEAD</option>
+                <option value="OPTIONS">OPTIONS</option>
+              </select>
+              <span class="method-select-arrow">▼</span>
+            </div>
+
+            <div class="url-input-wrap">
+              <input type="text" id="url-input" class="url-input" placeholder="输入请求 URL (如: https://api.example.com/v1/users?page=1)" spellcheck="false">
+              <button type="button" id="url-clear-btn" class="url-clear-btn" title="清空 URL">✕</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="builder-nav-tabs" aria-label="配置分类选项卡">
+          <button type="button" class="tab-btn active" data-tab="params">
+            <span>Params</span>
+            <span class="tab-count-badge" id="badge-params-count"></span>
+          </button>
+          <button type="button" class="tab-btn" data-tab="headers">
+            <span>Headers</span>
+            <span class="tab-count-badge" id="badge-headers-count"></span>
+          </button>
+          <button type="button" class="tab-btn" data-tab="body">
+            <span>Body</span>
+            <span class="tab-count-badge" id="badge-body-type"></span>
+          </button>
+          <button type="button" class="tab-btn" data-tab="auth">
+            <span>Auth</span>
+            <span class="tab-count-badge" id="badge-auth-type"></span>
+          </button>
+          <button type="button" class="tab-btn" data-tab="flags">
+            <span>⚡ cURL Man Page 参数</span>
+            <span class="tab-count-badge" id="badge-flags-count"></span>
+          </button>
+        </nav>
+
+        <!-- Tab Content Panes -->
+        <div class="builder-tab-content">
+          <!-- Params Tab -->
+          <div id="tab-pane-params" class="builder-tab-pane">
+            <div id="params-table-container"></div>
+          </div>
+
+          <!-- Headers Tab -->
+          <div id="tab-pane-headers" class="builder-tab-pane" style="display: none;">
+            <div id="headers-table-container"></div>
+          </div>
+
+          <!-- Body Tab -->
+          <div id="tab-pane-body" class="builder-tab-pane" style="display: none;">
+            <div id="body-editor-container"></div>
+          </div>
+
+          <!-- Auth Tab -->
+          <div id="tab-pane-auth" class="builder-tab-pane" style="display: none;">
+            <div id="auth-panel-container"></div>
+          </div>
+
+          <!-- Flags Tab -->
+          <div id="tab-pane-flags" class="builder-tab-pane" style="display: none;">
+            <div id="flags-explorer-container"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Panel: Live Terminal Output -->
+      <section class="terminal-panel" aria-label="实时 cURL 命令输出区">
+        <div id="terminal-container" style="height: 100%;"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/core/curl-flags-data.js"></script>
+  <script src="js/core/shell-escaper.js"></script>
+  <script src="js/core/curl-generator.js"></script>
+  <script src="js/core/state-store.js"></script>
+  <script src="js/ui/theme-controller.js"></script>
+  <script src="js/ui/key-value-table.js"></script>
+  <script src="js/ui/body-editor.js"></script>
+  <script src="js/ui/auth-panel.js"></script>
+  <script src="js/ui/flags-explorer.js"></script>
+  <script src="js/ui/terminal-output.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

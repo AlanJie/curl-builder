@@ -1,0 +1,242 @@
+/* ==========================================================================
+   Terminal Window & Code Highlighter & Toast System (Linear Style)
+   ========================================================================== */
+
+.terminal-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #000000;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* Terminal Header */
+.terminal-header {
+  height: 48px;
+  background-color: transparent;
+  border-bottom: 1px solid #222222;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  flex-shrink: 0;
+}
+
+.terminal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #333333; /* Monochrome dots for a more serious look */
+}
+
+.terminal-title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: #888888;
+  letter-spacing: 0.02em;
+}
+
+/* Format Switcher Tabs */
+.format-switcher {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background-color: transparent;
+}
+
+.format-pill {
+  padding: 4px 10px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: #666666;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.format-pill:hover {
+  color: #cccccc;
+}
+
+.format-pill.active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Terminal Body */
+.terminal-body {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: #ffffff;
+  user-select: text;
+}
+
+.terminal-code {
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-family: inherit;
+}
+
+/* Syntax Highlighting */
+.hl-cmd {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.hl-flag {
+  color: #a78bfa;
+}
+
+.hl-url {
+  color: #34d399;
+  text-decoration: underline;
+  text-decoration-color: rgba(52, 211, 153, 0.4);
+}
+
+.hl-str {
+  color: #fcd34d;
+}
+
+.hl-cont {
+  color: #666666;
+}
+
+/* Terminal Footer & Actions Bar */
+.terminal-footer {
+  height: 56px;
+  background-color: transparent;
+  border-top: 1px solid #222222;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  flex-shrink: 0;
+}
+
+.terminal-stats {
+  font-size: 12px;
+  color: #666666;
+  font-family: var(--font-mono);
+}
+
+.terminal-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-copy {
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  color: #000000;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 0 16px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-copy:hover {
+  background-color: #e0e0e0;
+  border-color: #e0e0e0;
+}
+
+.btn-copy:active {
+  transform: translateY(1px);
+}
+
+.btn-copy.copied {
+  background-color: #10b981;
+  border-color: #10b981;
+  color: #ffffff;
+}
+
+/* Toast Notifications */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.toast {
+  background-color: var(--bg-surface-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: auto;
+  animation: toast-in 0.2s ease-out forwards;
+}
+
+.toast-icon {
+  font-size: 16px;
+}
+
+.toast.success {
+  border-color: var(--success-color);
+}
+
+.toast.success .toast-icon {
+  color: var(--success-color);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
