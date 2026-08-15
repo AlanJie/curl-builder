@@ -1,0 +1,33 @@
+name: Release Standalone Builder
+
+on:
+  push:
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  build:
+    name: Build & Release Single HTML
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build standalone HTML
+        run: node build-standalone.js
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/curl-builder-standalone.html
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
