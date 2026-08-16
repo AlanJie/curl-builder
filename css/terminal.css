@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: #000000;
+  background-color: var(--bg-terminal);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -16,7 +16,7 @@
 .terminal-header {
   height: 48px;
   background-color: transparent;
-  border-bottom: 1px solid #222222;
+  border-bottom: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,14 +40,14 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #333333; /* Monochrome dots for a more serious look */
+  background-color: var(--border-hover); /* Monochrome dots */
 }
 
 .terminal-title {
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 500;
-  color: #888888;
+  color: var(--text-secondary);
   letter-spacing: 0.02em;
 }
 
@@ -64,7 +64,7 @@
   font-size: 12px;
   font-family: var(--font-mono);
   font-weight: 500;
-  color: #666666;
+  color: var(--text-muted);
   background: transparent;
   border: none;
   border-radius: var(--radius-sm);
@@ -73,11 +73,12 @@
 }
 
 .format-pill:hover {
-  color: #cccccc;
+  color: var(--text-primary);
 }
 
 .format-pill.active {
-  color: #ffffff;
+  color: var(--text-inverse);
+  background-color: var(--accent-primary);
   font-weight: 600;
 }
 
@@ -90,7 +91,7 @@
   font-family: var(--font-mono);
   font-size: 13px;
   line-height: 1.6;
-  color: #ffffff;
+  color: var(--text-primary);
   user-select: text;
 }
 
@@ -102,33 +103,33 @@
 
 /* Syntax Highlighting */
 .hl-cmd {
-  color: #ffffff;
+  color: var(--syntax-cmd);
   font-weight: 600;
 }
 
 .hl-flag {
-  color: #a78bfa;
+  color: var(--syntax-flag);
 }
 
 .hl-url {
-  color: #34d399;
+  color: var(--syntax-url);
   text-decoration: underline;
-  text-decoration-color: rgba(52, 211, 153, 0.4);
+  text-decoration-color: var(--accent-subtle);
 }
 
 .hl-str {
-  color: #fcd34d;
+  color: var(--syntax-str);
 }
 
 .hl-cont {
-  color: #666666;
+  color: var(--syntax-punct);
 }
 
 /* Terminal Footer & Actions Bar */
 .terminal-footer {
   height: 56px;
   background-color: transparent;
-  border-top: 1px solid #222222;
+  border-top: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -138,7 +139,7 @@
 
 .terminal-stats {
   font-size: 12px;
-  color: #666666;
+  color: var(--text-muted);
   font-family: var(--font-mono);
 }
 
@@ -149,9 +150,9 @@
 }
 
 .btn-copy {
-  background-color: #ffffff;
-  border: 1px solid #ffffff;
-  color: #000000;
+  background-color: var(--text-primary);
+  border: 1px solid var(--text-primary);
+  color: var(--text-inverse);
   font-weight: 600;
   font-family: var(--font-sans);
   font-size: 13px;
@@ -166,8 +167,7 @@
 }
 
 .btn-copy:hover {
-  background-color: #e0e0e0;
-  border-color: #e0e0e0;
+  opacity: 0.9;
 }
 
 .btn-copy:active {
@@ -175,8 +175,8 @@
 }
 
 .btn-copy.copied {
-  background-color: #10b981;
-  border-color: #10b981;
+  background-color: var(--success-color);
+  border-color: var(--success-color);
   color: #ffffff;
 }
 

@@ -12,7 +12,7 @@
 }(typeof self !== 'undefined' ? self : this, function() {
   'use strict';
 
-  function createInitialState() {
+  function createSampleState() {
     return {
       method: 'POST',
       url: 'https://httpbin.org/post',
@@ -60,6 +60,37 @@
         'connect-timeout': { id: 'connect-timeout', name: '--connect-timeout', type: 'number', value: '10', enabled: true }
       },
       outputFormat: 'bash' // bash | powershell | cmd | single
+    };
+  }
+
+  function createInitialState() {
+    return {
+      method: 'GET',
+      url: '',
+      queryParams: [],
+      headers: [],
+      body: {
+        type: 'none',
+        json: '',
+        formData: [],
+        urlEncoded: [],
+        raw: '',
+        rawType: 'text',
+        binaryPath: ''
+      },
+      auth: {
+        type: 'none',
+        bearerToken: '',
+        basicUser: '',
+        basicPass: '',
+        apiKeyName: 'X-API-Key',
+        apiKeyValue: '',
+        apiKeyIn: 'header',
+        digestUser: '',
+        digestPass: ''
+      },
+      activeFlags: {},
+      outputFormat: 'bash'
     };
   }
 
@@ -252,7 +283,7 @@
     }
 
     loadSample() {
-      this.state = createInitialState();
+      this.state = createSampleState();
       this.notify();
     }
   }
