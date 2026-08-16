@@ -1,0 +1,81 @@
+name: Check and Update Official Docs
+
+on:
+  schedule:
+    # Runs everyday at 02:00 UTC (10:00 AM Beijing Time)
+    - cron: '0 2 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  check-and-update:
+    name: Auto-Sync Official Docs & Bump Build Tag
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all tags and full history
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python Dependencies
+        run: pip install beautifulsoup4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch Latest Docs & Regenerate Data
+        run: python update_docs.py
+
+      - name: Check for Changes, Commit, and Bump Build Tag
+        run: |
+          # Check if manpage or flags data has changes
+          if git diff --quiet manpage.html js/core/curl-flags-data.js; then
+            echo "No changes found in official cURL documentation. Repository is up-to-date."
+            exit 0
+          fi
+
+          echo "Official documentation updates detected! Preparing commit and release tag..."
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Get latest tag (fallback to v1.0.0 if not found)
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
+          echo "Current latest tag: $LATEST_TAG"
+
+          # Increment patch/build version (e.g. v1.0.2 -> v1.0.3)
+          if [[ $LATEST_TAG =~ ^v?([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            MAJOR="${BASH_REMATCH[1]}"
+            MINOR="${BASH_REMATCH[2]}"
+            PATCH="${BASH_REMATCH[3]}"
+            NEW_PATCH=$((PATCH + 1))
+            NEW_TAG="v${MAJOR}.${MINOR}.${NEW_PATCH}"
+          elif [[ $LATEST_TAG =~ ^v?([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            MAJOR="${BASH_REMATCH[1]}"
+            MINOR="${BASH_REMATCH[2]}"
+            PATCH="${BASH_REMATCH[3]}"
+            BUILD="${BASH_REMATCH[4]}"
+            NEW_BUILD=$((BUILD + 1))
+            NEW_TAG="v${MAJOR}.${MINOR}.${PATCH}.${NEW_BUILD}"
+          else
+            NEW_TAG="v1.0.3"
+          fi
+
+          echo "Bumping build tag to: $NEW_TAG"
+
+          git add manpage.html js/core/curl-flags-data.js
+          git commit -m "chore(docs): auto-update cURL official manpage data to ${NEW_TAG} [skip ci]"
+          git push origin main
+
+          git tag -a "${NEW_TAG}" -m "Automated docs update release ${NEW_TAG}"
+          git push origin "${NEW_TAG}"
+          echo "Successfully pushed update and triggered release for ${NEW_TAG}."
