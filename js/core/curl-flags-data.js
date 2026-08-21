@@ -223,8 +223,8 @@
     "type": "boolean",
     "category": "output",
     "popularity": 95,
-    "summary": "Silent or quiet mode. Do not show progress meter, warning messages or error messages. Makes curl mute. It still outputs the data you ask for, potentially even to the terminal/stdout unless you redirect it.",
-    "description": "Silent or quiet mode. Do not show progress meter, warning messages or error messages. Makes curl mute. It still outputs the data you ask for, potentially even to the terminal/stdout unless you redirect it.\n\nUse --show-error in addition to this option to disable progress meter but still show error messages.\n\nProviding --silent multiple times has no extra effect. Disable it again with --no-silent.\n\nExample:\n\nSee also --verbose, --stderr and --no-progress-meter.",
+    "summary": "Silent or quiet mode. Do not show progress meter, note messages, warning messages or error messages. Makes curl mute. It still outputs the data you ask for, potentially even to the terminal/stdout unless you redirect it.",
+    "description": "Silent or quiet mode. Do not show progress meter, note messages, warning messages or error messages. Makes curl mute. It still outputs the data you ask for, potentially even to the terminal/stdout unless you redirect it.\n\nUse --show-error in addition to this option to disable progress meter but still show error messages.\n\nProviding --silent multiple times has no extra effect. Disable it again with --no-silent.\n\nExample:\n\nSee also --verbose, --stderr and --no-progress-meter.",
     "choices": [],
     "examples": [
       "curl -s https://example.com"
