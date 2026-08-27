@@ -1749,6 +1749,7 @@ curl --krb clear ftp://example.com/
 <p class="level1">For <a class="emphasis" href="#--krb">--krb</a> to work, it requires that the underlying libcurl is built to support Kerberos. See also <a class="emphasis" href="#--delegation">--delegation</a> and <a class="emphasis" href="#--ssl">--ssl</a>. </p>
 <p class="level0"><a name="--libcurl"></a><span class="nroffip">--libcurl &lt;file&gt;</span> </p>
 <p class="level1">Append this option to any ordinary curl command line, and you get libcurl-using C source code written to the file that does the equivalent of what your command-line operation does. </p>
+<p class="level1">The source code output should be considered example code and is not production ready. You must double-check that the code actually does what you want it do. </p>
 <p class="level1">This option is global and does not need to be specified for each use of <a class="emphasis" href="#--next">--next</a>. </p>
 <p class="level1">If <a class="emphasis" href="#--libcurl">--libcurl</a> is provided several times, the last set value is used. </p>
 <p class="level1">Example: </p><pre class="level1">
@@ -2223,7 +2224,7 @@ curl -&#35; -O https://example.com
 </pre>
 <p class="level1">See also <a class="emphasis" href="#--styled-output">--styled-output</a>. </p>
 <p class="level0"><a name="--proto"></a><span class="nroffip">--proto &lt;protocols&gt;</span> </p>
-<p class="level1">Limit what protocols to allow for transfers. Protocols are evaluated left to right, are comma separated, and are each a protocol name or &apos;all&apos;, optionally prefixed by zero or more modifiers. Available modifiers are: </p>
+<p class="level1">Limit what protocols to allow for transfers. Protocols are evaluated left to right, are comma separated, and are each a protocol name or &apos;all&apos;, optionally prefixed by a modifier. Available modifiers are: </p>
 <p class="level1"><a name=""></a><span class="nroffip">+</span> </p>
 <p class="level2">Permit this protocol in addition to protocols already permitted (this is the default if no modifier is used). </p>
 <p class="level1"><a name="-"></a><span class="nroffip">-</span> </p>

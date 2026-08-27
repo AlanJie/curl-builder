@@ -4209,7 +4209,7 @@
     "category": "output",
     "popularity": 15,
     "summary": "Append this option to any ordinary curl command line, and you get libcurl-using C source code written to the file that does the equivalent of what your command-line operation does.",
-    "description": "Append this option to any ordinary curl command line, and you get libcurl-using C source code written to the file that does the equivalent of what your command-line operation does.\n\nThis option is global and does not need to be specified for each use of --next.\n\nIf --libcurl is provided several times, the last set value is used.\n\nExample:\n\nSee also --verbose.",
+    "description": "Append this option to any ordinary curl command line, and you get libcurl-using C source code written to the file that does the equivalent of what your command-line operation does.\n\nThe source code output should be considered example code and is not production ready. You must double-check that the code actually does what you want it do.\n\nThis option is global and does not need to be specified for each use of --next.\n\nIf --libcurl is provided several times, the last set value is used.\n\nExample:\n\nSee also --verbose.",
     "choices": [],
     "examples": [
       "curl --libcurl client.c https://example.com"
@@ -6452,8 +6452,8 @@
     "type": "choice",
     "category": "protocol",
     "popularity": 15,
-    "summary": "Limit what protocols to allow for transfers. Protocols are evaluated left to right, are comma separated, and are each a protocol name or 'all', optionally prefixed by zero or more modifiers. Available modifiers are:",
-    "description": "Limit what protocols to allow for transfers. Protocols are evaluated left to right, are comma separated, and are each a protocol name or 'all', optionally prefixed by zero or more modifiers. Available modifiers are:\n\n-\n\nDeny this protocol, removing it from the list of protocols already permitted.\n\nFor example: --proto -ftps uses the default protocols, but disables ftps\n\n--proto -all,https,+http only enables http and https\n\n--proto =http,https also only enables http and https\n\nUnknown and disabled protocols produce a warning. This allows scripts to safely rely on being able to disable potentially dangerous protocols, without relying upon support for that protocol being built into curl to avoid an error.\n\nThis option can be used multiple times, in which case the effect is the same as concatenating the protocols into one instance of the option.\n\nIf --proto is provided several times, the last set value is used.\n\nExample:\n\nSee also --proto-redir and --proto-default.",
+    "summary": "Limit what protocols to allow for transfers. Protocols are evaluated left to right, are comma separated, and are each a protocol name or 'all', optionally prefixed by a modifier. Available modifiers are:",
+    "description": "Limit what protocols to allow for transfers. Protocols are evaluated left to right, are comma separated, and are each a protocol name or 'all', optionally prefixed by a modifier. Available modifiers are:\n\n-\n\nDeny this protocol, removing it from the list of protocols already permitted.\n\nFor example: --proto -ftps uses the default protocols, but disables ftps\n\n--proto -all,https,+http only enables http and https\n\n--proto =http,https also only enables http and https\n\nUnknown and disabled protocols produce a warning. This allows scripts to safely rely on being able to disable potentially dangerous protocols, without relying upon support for that protocol being built into curl to avoid an error.\n\nThis option can be used multiple times, in which case the effect is the same as concatenating the protocols into one instance of the option.\n\nIf --proto is provided several times, the last set value is used.\n\nExample:\n\nSee also --proto-redir and --proto-default.",
     "choices": [
       {
         "value": "+",
