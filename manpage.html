@@ -571,7 +571,7 @@ https://example.com/
 <p class="level0">If you want a progress meter for HTTP POST or PUT requests, you need to redirect the response output to a file, using shell redirect (&gt;), <a class="emphasis" href="#--output">--output</a> or similar. </p>
 <p class="level0">This does not apply to FTP upload as that operation does not spit out any response data to the terminal. </p>
 <p class="level0">If you prefer a progress bar instead of the regular meter, <a class="emphasis" href="#--progress-bar">--progress-bar</a> is your friend. You can also disable the progress meter completely with the <a class="emphasis" href="#--silent">--silent</a> option. </p><a name="VERSION"></a><h2 class="nroffsh">Version</h2>
-<p class="level0">This man page describes curl 8.22.0. If you use a later version, chances are this man page does not fully document it. If you use an earlier version, this document tries to include version information about which specific version that introduced changes. </p>
+<p class="level0">This man page describes curl 8.22.1. If you use a later version, chances are this man page does not fully document it. If you use an earlier version, this document tries to include version information about which specific version that introduced changes. </p>
 <p class="level0">You can always learn which the latest curl version is by running </p><pre class="level0">
 curl https://curl.se/info
 </pre>
@@ -1977,7 +1977,7 @@ curl --no-buffer https://example.com
 </pre>
 <p class="level1">See also <a class="emphasis" href="#--progress-bar">--progress-bar</a>. </p>
 <p class="level0"><a name="--no-clobber"></a><span class="nroffip">--no-clobber</span> </p>
-<p class="level1">When used in conjunction with the <a class="emphasis" href="#--output">--output</a>, <a class="emphasis" href="#--remote-header-name">--remote-header-name</a>, <a class="emphasis" href="#--remote-name">--remote-name</a>, or <a class="emphasis" href="#--remote-name-all">--remote-name-all</a> options, curl avoids overwriting files that already exist. Instead, a dot and a number gets appended to the name of the file that would be created, up to filename.100 after which it does not create any file. </p>
+<p class="level1">When used in conjunction with the <a class="emphasis" href="#--output">--output</a>, <a class="emphasis" href="#--remote-header-name">--remote-header-name</a>, <a class="emphasis" href="#--remote-name">--remote-name</a>, or <a class="emphasis" href="#--remote-name-all">--remote-name-all</a> options, curl avoids overwriting files that already exist. Instead, a dot and a number gets appended to the name of the file that would be created, up to filename.9999 after which it does not create any file. </p>
 <p class="level1">Note that this is the negated option name documented. You can thus use <span Class="emphasis">--clobber</span> to enforce the clobbering, even if <a class="emphasis" href="#--remote-header-name">--remote-header-name</a> is specified. </p>
 <p class="level1">The <a class="emphasis" href="#--continue-at">--continue-at</a> option cannot be used together with <a class="emphasis" href="#--no-clobber">--no-clobber</a>. </p>
 <p class="level1">Providing <a class="emphasis" href="#--no-clobber">--no-clobber</a> multiple times has no extra effect. Disable it again with --clobber. </p>
@@ -3368,7 +3368,7 @@ curl -u user:secret https://example.com
 <p class="level0"><a name="-A"></a><a name="--user-agent"></a><span class="nroffip">-A, --user-agent &lt;name&gt;</span> </p>
 <p class="level1">(HTTP) Specify the User-Agent string to send to the HTTP server. To encode blanks in the string, surround the string with single or double quote marks. This header can also be set with the <a class="emphasis" href="#--header">--header</a> or the <a class="emphasis" href="#--proxy-header">--proxy-header</a> options. </p>
 <p class="level1">If you give an empty argument to <a class="emphasis" href="#--user-agent">--user-agent</a> (&quot;&quot;), it removes the header completely from the request. If you prefer a blank header, you can set it to a single space (&quot; &quot;). </p>
-<p class="level1">By default, curl uses curl/VERSION, such as User-Agent: curl/8.22.0. </p>
+<p class="level1">By default, curl uses curl/VERSION, such as User-Agent: curl/8.22.1. </p>
 <p class="level1">If <a class="emphasis" href="#--user-agent">--user-agent</a> is provided several times, the last set value is used. </p>
 <p class="level1">Example: </p><pre class="level1">
 curl -A &quot;Agent 007&quot; https://example.com

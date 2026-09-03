@@ -396,7 +396,7 @@
     "category": "http",
     "popularity": 90,
     "summary": "(HTTP) Specify the User-Agent string to send to the HTTP server. To encode blanks in the string, surround the string with single or double quote marks. This header can also be set with the --header or the --proxy-header options.",
-    "description": "(HTTP) Specify the User-Agent string to send to the HTTP server. To encode blanks in the string, surround the string with single or double quote marks. This header can also be set with the --header or the --proxy-header options.\n\nIf you give an empty argument to --user-agent (\"\"), it removes the header completely from the request. If you prefer a blank header, you can set it to a single space (\" \").\n\nBy default, curl uses curl/VERSION, such as User-Agent: curl/8.22.0.\n\nIf --user-agent is provided several times, the last set value is used.\n\nExample:\n\nSee also --header and --proxy-header.",
+    "description": "(HTTP) Specify the User-Agent string to send to the HTTP server. To encode blanks in the string, surround the string with single or double quote marks. This header can also be set with the --header or the --proxy-header options.\n\nIf you give an empty argument to --user-agent (\"\"), it removes the header completely from the request. If you prefer a blank header, you can set it to a single space (\" \").\n\nBy default, curl uses curl/VERSION, such as User-Agent: curl/8.22.1.\n\nIf --user-agent is provided several times, the last set value is used.\n\nExample:\n\nSee also --header and --proxy-header.",
     "choices": [],
     "examples": [
       "curl -A \"Agent 007\" https://example.com"
@@ -1581,8 +1581,8 @@
     "type": "boolean",
     "category": "http",
     "popularity": 15,
-    "summary": "When used in conjunction with the --output, --remote-header-name, --remote-name, or --remote-name-all options, curl avoids overwriting files that already exist. Instead, a dot and a number gets appended to the name of the file that would be created, up to filename.100 after which it does not create any file.",
-    "description": "When used in conjunction with the --output, --remote-header-name, --remote-name, or --remote-name-all options, curl avoids overwriting files that already exist. Instead, a dot and a number gets appended to the name of the file that would be created, up to filename.100 after which it does not create any file.\n\nNote that this is the negated option name documented. You can thus use --clobber to enforce the clobbering, even if --remote-header-name is specified.\n\nThe --continue-at option cannot be used together with --no-clobber.\n\nProviding --no-clobber multiple times has no extra effect. Disable it again with --clobber.\n\nExample:\n\nAdded in 7.83.0. See also --output and --remote-name.",
+    "summary": "When used in conjunction with the --output, --remote-header-name, --remote-name, or --remote-name-all options, curl avoids overwriting files that already exist. Instead, a dot and a number gets appended to the name of the file that would be created, up to filename.9999 after which it does not create any file.",
+    "description": "When used in conjunction with the --output, --remote-header-name, --remote-name, or --remote-name-all options, curl avoids overwriting files that already exist. Instead, a dot and a number gets appended to the name of the file that would be created, up to filename.9999 after which it does not create any file.\n\nNote that this is the negated option name documented. You can thus use --clobber to enforce the clobbering, even if --remote-header-name is specified.\n\nThe --continue-at option cannot be used together with --no-clobber.\n\nProviding --no-clobber multiple times has no extra effect. Disable it again with --clobber.\n\nExample:\n\nAdded in 7.83.0. See also --output and --remote-name.",
     "choices": [],
     "examples": [
       "curl --no-clobber --output local/dir/file https://example.com"
