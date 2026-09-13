@@ -475,7 +475,7 @@
 <a name="NAME"></a><h2 class="nroffsh">Name</h2>
 <p class="level0">curl - transfer a URL </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2>
 <p class="level0"><span Class="bold">curl [options / URLs]</span> </p><a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
-<p class="level0"><span Class="bold">curl</span> is a tool for transferring data from or to a server using URLs. It supports these protocols: DICT, FILE, FTP, FTPS, GOPHER, GOPHERS, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, MQTT, MQTTS, POP3, POP3S, RTSP, SCP, SFTP, SMB, SMBS, SMTP, SMTPS, TELNET, TFTP, WS and WSS. </p>
+<p class="level0"><span Class="bold">curl</span> is a tool for transferring data from or to a server using URLs. It supports these protocols: DICT, FILE, FTP, FTPS, GOPHER, GOPHERS, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, MQTT, MQTTS, POP3, POP3S, RTSP, SCP, SFTP, SMTP, SMTPS, TELNET, TFTP, WS and WSS. </p>
 <p class="level0">curl is powered by libcurl for all transfer-related features. See <a Class="emphasis" href="../libcurl/c/libcurl.html">libcurl</a> for details. </p><a name="URL"></a><h2 class="nroffsh">Url</h2>
 <p class="level0">The URL syntax is protocol-dependent. You can find a detailed description in <a href="https://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a>. </p>
 <p class="level0">If you provide a URL without a leading &quot;protocol://&quot; scheme, curl guesses what protocol you want. It then defaults to HTTP but assumes others based on often-used hostname prefixes. For example, for hostnames starting with &quot;ftp.&quot; curl assumes you want FTP. </p>
@@ -556,8 +556,6 @@ https://example.com/
 <p class="level1">curl supports SSH version 2 scp transfers. </p>
 <p class="level0"><a name="SFTP"></a><span class="nroffip">SFTP</span> </p>
 <p class="level1">curl supports SFTP (draft 5) done over SSH version 2. </p>
-<p class="level0"><a name="SMBS"></a><span class="nroffip">SMB(S)</span> </p>
-<p class="level1">curl supports SMB version 1 for upload and download. </p>
 <p class="level0"><a name="SMTPS"></a><span class="nroffip">SMTP(S)</span> </p>
 <p class="level1">Uploading contents to an SMTP server means sending an email. With or without TLS. </p>
 <p class="level0"><a name="TELNET"></a><span class="nroffip">TELNET</span> </p>
