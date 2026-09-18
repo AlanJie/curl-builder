@@ -6776,7 +6776,7 @@
       }
     ],
     "examples": [
-      "openssl genpkey -algorithm ED25519 -out k.pem\nopenssl pkey -in k.pem -outform RAW -out k.raw\nxxd -p -c 64 k.raw | tr -d '\\n' > k.hex",
+      "openssl genpkey -algorithm ED25519 -out k.pem\nopenssl pkey -in k.pem -text -noout | \\\n  grep -A3 ^priv: | \\\n  tr -cd '[:xdigit:]' > k.hex",
       "curl --httpsig-algo ed25519 --httpsig-key @key.hex --httpsig-keyid \"my-key\" https://example.com\ncurl --httpsig-key 123a56fb72197633bc --httpsig-keyid \"my-key\" https://example.com"
     ],
     "addedIn": "8.22.0.",

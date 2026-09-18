@@ -1574,8 +1574,9 @@ curl --httpsig-algo ed25519 --httpsig-key key.hex --httpsig-keyid &quot;my-key&q
 <p class="level1"><a name="Generating"></a><span class="nroffip">Generating Ed25519 keys</span> </p>
 <p class="level2">With OpenSSL 3: </p><pre class="level2">
 openssl genpkey -algorithm ED25519 -out k.pem
-openssl pkey -in k.pem -outform RAW -out k.raw
-xxd -p -c 64 k.raw | tr -d &apos;&bsol;n&apos; &gt; k.hex
+openssl pkey -in k.pem -text -noout | &bsol;
+&nbsp; grep -A3 ^priv: | &bsol;
+&nbsp; tr -cd &apos;[:xdigit:]&apos; &gt; k.hex
 </pre>
 <p class="level2">Use &quot;@k.hex&quot; with &quot;<a class="emphasis" href="#--httpsig-key">--httpsig-key</a>&quot;. </p>
 <p class="level0"><span class="nroffip"></span> </p>
