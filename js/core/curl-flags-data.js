@@ -396,7 +396,7 @@
     "category": "http",
     "popularity": 90,
     "summary": "(HTTP) Specify the User-Agent string to send to the HTTP server. To encode blanks in the string, surround the string with single or double quote marks. This header can also be set with the --header or the --proxy-header options.",
-    "description": "(HTTP) Specify the User-Agent string to send to the HTTP server. To encode blanks in the string, surround the string with single or double quote marks. This header can also be set with the --header or the --proxy-header options.\n\nIf you give an empty argument to --user-agent (\"\"), it removes the header completely from the request. If you prefer a blank header, you can set it to a single space (\" \").\n\nBy default, curl uses curl/VERSION, such as User-Agent: curl/8.22.1.\n\nIf --user-agent is provided several times, the last set value is used.\n\nExample:\n\nSee also --header and --proxy-header.",
+    "description": "(HTTP) Specify the User-Agent string to send to the HTTP server. To encode blanks in the string, surround the string with single or double quote marks. This header can also be set with the --header or the --proxy-header options.\n\nIf you give an empty argument to --user-agent (\"\"), it removes the header completely from the request. If you prefer a blank header, you can set it to a single space (\" \").\n\nBy default, curl uses curl/VERSION, such as User-Agent: curl/8.23.0.\n\nIf --user-agent is provided several times, the last set value is used.\n\nExample:\n\nSee also --header and --proxy-header.",
     "choices": [],
     "examples": [
       "curl -A \"Agent 007\" https://example.com"
@@ -1627,10 +1627,10 @@
     "category": "http",
     "popularity": 15,
     "summary": "Specify the directory in which files should be stored, when --remote-name or --output are used.",
-    "description": "Specify the directory in which files should be stored, when --remote-name or --output are used.\n\nThe given output directory is used for all URLs and output options on the command line, up until the first --next.\n\nIf the specified target directory does not exist, the operation fails unless --create-dirs is also used.\n\nIf --output-dir is provided several times, the last set value is used.\n\nExample:\n\nAdded in 7.73.0. See also --remote-name and --remote-header-name.",
+    "description": "Specify the directory in which files should be stored, when --remote-name or --output are used.\n\nThe given output directory is used for all URLs and output options on the command line, up until the first --next.\n\nIf the specified target directory does not exist, the operation fails unless --create-dirs is also used.\n\nThe specified output directory is prepended to the destination filename that would otherwise be used, including any directory component. No attempt is made to neutralize \"../\" sequences or similar constructs in the resulting path.\n\nIf --output-dir is provided several times, the last set value is used.\n\nExamples:\n\nAdded in 7.73.0. See also --remote-name and --remote-header-name.",
     "choices": [],
     "examples": [
-      "curl --output-dir \"tmp\" -O https://example.com"
+      "curl --output-dir \"tmp\" -O https://example.com\ncurl --output-dir \"tmp\" -o filename.html https://example.com"
     ],
     "addedIn": "7.73.0.",
     "seeAlso": [
