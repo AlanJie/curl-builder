@@ -2762,7 +2762,7 @@ curl --resolve example.com:443:[2001:db8::252f:efd6] https://example.com
 <p class="level0"><a name="--retry"></a><span class="nroffip">--retry &lt;num&gt;</span> </p>
 <p class="level1">If a transient error is returned when curl tries to perform a transfer, it retries this number of times before giving up. Setting the number to 0 makes curl do no retries (which is the default). Transient error means either: a timeout, an FTP 4xx response code or an HTTP 408, 429, 500, 502, 503, 504, 522 or 524 response code. </p>
 <p class="level1">When curl is about to retry a transfer, it first waits one second and then for all forthcoming retries it doubles the waiting time until it reaches 10 minutes, which then remains the set fixed delay time between the rest of the retries. By using <a class="emphasis" href="#--retry-delay">--retry-delay</a> you disable this exponential backoff algorithm. See also <a class="emphasis" href="#--retry-max-time">--retry-max-time</a> to limit the total time allowed for retries. </p>
-<p class="level1">curl complies with the Retry-After: response header if one was present to know when to issue the next retry (added in 7.66.0). </p>
+<p class="level1">curl complies with the Retry-After: response header if one was present to know when to issue the next retry (added in 7.66.0). That means the server can override the retry delay. To handle server retry delays that may be longer than expected, you can use <a class="emphasis" href="#--retry-max-time">--retry-max-time</a> to limit the total retry time. </p>
 <p class="level1">If <a class="emphasis" href="#--retry">--retry</a> is provided several times, the last set value is used. </p>
 <p class="level1">Example: </p><pre class="level1">
 curl --retry 7 https://example.com
@@ -2789,6 +2789,7 @@ curl --retry-connrefused --retry 7 https://example.com
 <p class="level1">Make curl sleep this amount of time before each retry when a transfer has failed with a transient error (it changes the default backoff time algorithm between retries). This option is only interesting if <a class="emphasis" href="#--retry">--retry</a> is also used. Setting this delay to zero makes curl use the default backoff time. </p>
 <p class="level1">By default, curl uses an exponentially increasing timeout between retries. </p>
 <p class="level1">Starting in curl 8.16.0, this option accepts a time as decimal number for parts of seconds. The decimal value needs to be provided using a dot (.) as decimal separator - not the local version even if it might be using another separator. </p>
+<p class="level1">curl complies with the Retry-After: response header if one was present to know when to issue the next retry (added in 7.66.0). That means the server can override the retry delay. To handle server retry delays that may be longer than expected, you can use <a class="emphasis" href="#--retry-max-time">--retry-max-time</a> to limit the total retry time. </p>
 <p class="level1">If <a class="emphasis" href="#--retry-delay">--retry-delay</a> is provided several times, the last set value is used. </p>
 <p class="level1">Example: </p><pre class="level1">
 curl --retry-delay 5 --retry 7 https://example.com
