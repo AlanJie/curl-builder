@@ -2029,7 +2029,8 @@ curl --noproxy &quot;www.example&quot; https://example.com
 </pre>
 <p class="level1">See also <a class="emphasis" href="#--proxy">--proxy</a>. </p>
 <p class="level0"><a name="--ntlm"></a><span class="nroffip">--ntlm</span> </p>
-<p class="level1">(HTTP) Use NTLM authentication. The NTLM authentication method was designed by Microsoft and is used by IIS web servers. It is a proprietary protocol, reverse-engineered by clever people and implemented in curl based on their efforts. This kind of behavior should not be endorsed, you should encourage everyone who uses NTLM to switch to a public and documented authentication method instead, such as Digest. </p>
+<p class="level1">(HTTP) NTLM authentication support was removed in 8.24.0. This option is no longer supported and causes curl to fail with an unsupported-feature error. </p>
+<p class="level1">Use NTLM authentication. The NTLM authentication method was designed by Microsoft and is used by IIS web servers. It is a proprietary protocol, reverse-engineered by clever people and implemented in curl based on their efforts. This kind of behavior should not be endorsed, you should encourage everyone who uses NTLM to switch to a public and documented authentication method instead, such as Digest. </p>
 <p class="level1">If you want to enable NTLM for your proxy authentication, then use <a class="emphasis" href="#--proxy-ntlm">--proxy-ntlm</a>. </p>
 <p class="level1">Providing <a class="emphasis" href="#--ntlm">--ntlm</a> multiple times has no extra effect. Disable it again with --no-ntlm. </p>
 <p class="level1">Example: </p><pre class="level1">
@@ -2431,6 +2432,7 @@ curl --proxy-negotiate --proxy-user user:passwd -x proxy https://example.com
 </pre>
 <p class="level1">See also <a class="emphasis" href="#--proxy-anyauth">--proxy-anyauth</a>, <a class="emphasis" href="#--proxy-basic">--proxy-basic</a> and <a class="emphasis" href="#--proxy-service-name">--proxy-service-name</a>. </p>
 <p class="level0"><a name="--proxy-ntlm"></a><span class="nroffip">--proxy-ntlm</span> </p>
+<p class="level1">NTLM authentication support was removed in 8.24.0. This option is no longer supported and causes curl to fail with an unsupported-feature error. </p>
 <p class="level1">Use HTTP NTLM authentication when communicating with the given proxy. Use <a class="emphasis" href="#--ntlm">--ntlm</a> for enabling NTLM with a remote host. </p>
 <p class="level1">Providing <a class="emphasis" href="#--proxy-ntlm">--proxy-ntlm</a> multiple times has no extra effect. Disable it again with --no-proxy-ntlm. </p>
 <p class="level1">Example: </p><pre class="level1">
@@ -2529,7 +2531,7 @@ curl --proxy-tlsv1 -x https://proxy.example https://example.com
 <p class="level1">See also <a class="emphasis" href="#--proxy">--proxy</a>. </p>
 <p class="level0"><a name="-U"></a><a name="--proxy-user"></a><span class="nroffip">-U, --proxy-user &lt;user:password&gt;</span> </p>
 <p class="level1">Specify the username and password to use for proxy authentication. </p>
-<p class="level1">If you use a Windows SSPI-enabled curl binary and do either Negotiate or NTLM authentication then you can tell curl to select the username and password from your environment by specifying a single colon with this option: &quot;-U :&quot;. </p>
+<p class="level1">If you use a Windows SSPI-enabled curl binary and do Negotiate authentication then you can tell curl to select the username and password from your environment by specifying a single colon with this option: &quot;-U :&quot;. </p>
 <p class="level1">On systems where it works, curl hides the given option argument from process listings. This is not enough to protect credentials from possibly getting seen by other users on the same system as they still are visible for a moment before being cleared. Such sensitive data should be retrieved from a file instead or similar and never used in clear text in a command line. </p>
 <p class="level1">If <a class="emphasis" href="#--proxy-user">--proxy-user</a> is provided several times, the last set value is used. </p>
 <p class="level1">Example: </p><pre class="level1">
@@ -2764,6 +2766,7 @@ curl --resolve example.com:443:[2001:db8::252f:efd6] https://example.com
 <p class="level1">If a transient error is returned when curl tries to perform a transfer, it retries this number of times before giving up. Setting the number to 0 makes curl do no retries (which is the default). Transient error means either: a timeout, an FTP 4xx response code or an HTTP 408, 429, 500, 502, 503, 504, 522 or 524 response code. </p>
 <p class="level1">When curl is about to retry a transfer, it first waits one second and then for all forthcoming retries it doubles the waiting time until it reaches 10 minutes, which then remains the set fixed delay time between the rest of the retries. By using <a class="emphasis" href="#--retry-delay">--retry-delay</a> you disable this exponential backoff algorithm. See also <a class="emphasis" href="#--retry-max-time">--retry-max-time</a> to limit the total time allowed for retries. </p>
 <p class="level1">curl complies with the Retry-After: response header if one was present to know when to issue the next retry (added in 7.66.0). That means the server can override the retry delay. To handle server retry delays that may be longer than expected, you can use <a class="emphasis" href="#--retry-max-time">--retry-max-time</a> to limit the total retry time. </p>
+<p class="level1">Before retrying, curl removes data that the failed attempt wrote to an output file set with <a class="emphasis" href="#--output">--output</a> or <a class="emphasis" href="#--remote-name">--remote-name</a>. It cannot do that for data written to stdout, a pipe or a shell redirect, so a retry after a partially received transfer, such as a timeout in the middle of the body, may produce duplicate data there. Write to an output file instead, or avoid <a class="emphasis" href="#--retry">--retry</a> when the output is redirected. </p>
 <p class="level1">If <a class="emphasis" href="#--retry">--retry</a> is provided several times, the last set value is used. </p>
 <p class="level1">Example: </p><pre class="level1">
 curl --retry 7 https://example.com
@@ -3363,9 +3366,8 @@ curl -B ftp://example.com/README
 <p class="level1">The username and passwords are split up on the first colon, which makes it impossible to use a colon in the username with this option. The password can, still. </p>
 <p class="level1">On systems where it works, curl hides the given option argument from process listings. This is not enough to protect credentials from possibly getting seen by other users on the same system as they still are visible for a moment before being cleared. Such sensitive data should be retrieved from a file instead or similar and never used in clear text in a command line. </p>
 <p class="level1">When using Kerberos V5 with a Windows based server you should include the Windows domain name in the username, in order for the server to successfully obtain a Kerberos Ticket. If you do not, then the initial authentication handshake may fail. </p>
-<p class="level1">When using NTLM, the username can be specified without the domain, if there is a single domain and forest in your setup for example. </p>
 <p class="level1">To specify the domain name use either Down-Level Logon Name or UPN (User Principal Name) formats. For example, EXAMPLE&bsol;user and user@example.com respectively. </p>
-<p class="level1">If you use a Windows SSPI-enabled curl binary and perform Kerberos V5, Negotiate, NTLM or Digest authentication then you can tell curl to select the username and password from your environment by specifying a single colon with this option: &quot;-u :&quot;. </p>
+<p class="level1">If you use a Windows SSPI-enabled curl binary and perform Kerberos V5, Negotiate, Digest authentication then you can tell curl to select the username and password from your environment by specifying a single colon with this option: &quot;-u :&quot;. Also known as ambient user. </p>
 <p class="level1">If <a class="emphasis" href="#--user">--user</a> is provided several times, the last set value is used. </p>
 <p class="level1">Example: </p><pre class="level1">
 curl -u user:secret https://example.com
@@ -3500,7 +3502,7 @@ curl --verbose https://example.com
 <p class="level1"><a name="MultiSSL"></a><span class="nroffip">MultiSSL</span> </p>
 <p class="level2">This curl supports multiple TLS backends. </p>
 <p class="level1"><a name="NTLM"></a><span class="nroffip">NTLM</span> </p>
-<p class="level2">NTLM authentication is supported. </p>
+<p class="level2">NTLM authentication is supported. This feature was removed from curl in 8.23.0. </p>
 <p class="level1"><a name="NTLMWB"></a><span class="nroffip">NTLM_WB</span> </p>
 <p class="level2">NTLM delegation to winbind helper is supported. This feature was removed from curl in 8.8.0. </p>
 <p class="level1"><a name="PSL"></a><span class="nroffip">PSL</span> </p>
