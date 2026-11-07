@@ -3839,7 +3839,7 @@ https://somewhere.example.com
 <p class="level0"><a name="NETRC"></a><span class="nroffip">NETRC &lt;path&gt;</span> </p>
 <p class="level1">If set, this is used to find the &quot;.netrc&quot; file. It overrides all other netrc file location mechanisms and should be set to the full file path. (Added in curl 8.16.0) </p>
 <p class="level0"><a name="QLOGDIR"></a><span class="nroffip">QLOGDIR &lt;directory&gt;</span> </p>
-<p class="level1">If curl was built with HTTP/3 support, setting this environment variable to a local directory makes curl produce <span Class="bold">qlogs</span> in that directory, using file names named after the destination connection id (in hex). Do note that these files can become rather large. Works with the ngtcp2 and quiche QUIC backends. </p>
+<p class="level1">If curl was built with HTTP/3 support, setting this environment variable to a local directory makes curl produce <span Class="bold">qlogs</span> in that directory, using file names named after the destination connection id (in hex). Do note that these files can become rather large. The ngtcp2 backend supports <span Class="bold">qlogs</span> on Windows and other platforms. The quiche backend supports them only on non-Windows builds with library support for writing them to files. </p>
 <p class="level0"><a name="SHELL"></a><span class="nroffip">SHELL</span> </p>
 <p class="level1">Used on VMS when trying to detect if using a <span Class="bold">DCL</span> or a <span Class="bold">Unix</span> shell. </p>
 <p class="level0"><a name="SSLCERTDIR"></a><span class="nroffip">SSL_CERT_DIR &lt;directory&gt;</span> </p>
