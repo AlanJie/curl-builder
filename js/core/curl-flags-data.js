@@ -584,8 +584,8 @@
     "type": "boolean",
     "category": "http",
     "popularity": 85,
-    "summary": "(HTTP FTP) Show response headers in the output. HTTP response headers can include things like server name, cookies, date of the document, HTTP version and more. With non-HTTP protocols, the \"headers\" are other server communication.",
-    "description": "(HTTP FTP) Show response headers in the output. HTTP response headers can include things like server name, cookies, date of the document, HTTP version and more. With non-HTTP protocols, the \"headers\" are other server communication.\n\nThis option makes the response headers get saved in the same stream/output as the data. --dump-header exists to save headers in a separate stream.\n\nWhen HTTP headers are output to a tty, curl may use escape codes to make the header field names appear in bold and URLs in \"Location:\" headers be especially marked as such. Disable the use of terminal escape codes with --no-styled-output. (This means using the --styled-output option with a \"--no-\" prefix to disable it.)\n\nTo view the request headers, consider the --verbose option.\n\nPrior to 7.75.0 curl did not print the headers if --fail was used in combination with this option and there was an error reported by the server.\n\nThis option was called --include before 8.10.0. The previous name remains functional.\n\nProviding --show-headers multiple times has no extra effect. Disable it again with --no-show-headers.\n\nExample:\n\nSee also --verbose and --dump-header.",
+    "summary": "(HTTP FTP FILE) Show response headers in the output. HTTP response headers can include things like server name, cookies, date of the document, HTTP version and more. With non-HTTP protocols, the \"headers\" are other server communication.",
+    "description": "(HTTP FTP FILE) Show response headers in the output. HTTP response headers can include things like server name, cookies, date of the document, HTTP version and more. With non-HTTP protocols, the \"headers\" are other server communication.\n\nThis option makes the response headers get saved in the same stream/output as the data. --dump-header exists to save headers in a separate stream.\n\nWhen HTTP headers are output to a tty, curl may use escape codes to make the header field names appear in bold and URLs in \"Location:\" headers be especially marked as such. Disable the use of terminal escape codes with --no-styled-output. (This means using the --styled-output option with a \"--no-\" prefix to disable it.)\n\nWhen used on a FILE URL, curl includes the file size and last modification time only.\n\nTo view the request headers, consider the --verbose option.\n\nPrior to 7.75.0 curl did not print the headers if --fail was used in combination with this option and there was an error reported by the server.\n\nThis option was called --include before 8.10.0. The previous name remains functional.\n\nProviding --show-headers multiple times has no extra effect. Disable it again with --no-show-headers.\n\nExample:\n\nSee also --verbose and --dump-header.",
     "choices": [],
     "examples": [
       "curl -i https://example.com"
@@ -854,15 +854,16 @@
     "type": "filepath",
     "category": "output",
     "popularity": 80,
-    "summary": "(HTTP FTP) Write the received protocol headers to the specified file. If no headers are received, the use of this option creates an empty file. Specify \"-\" as filename (a single minus) to have it written to stdout.",
-    "description": "(HTTP FTP) Write the received protocol headers to the specified file. If no headers are received, the use of this option creates an empty file. Specify \"-\" as filename (a single minus) to have it written to stdout.\n\nStarting in curl 8.10.0, specify \"%\" (a single percent sign) as filename writes the output to stderr.\n\nWhen used in FTP, the FTP server response lines are considered being \"headers\" and thus are saved there.\n\nStarting in curl 8.11.0, using the --create-dirs option can also create missing directory components for the path provided in --dump-header.\n\nHaving multiple transfers in one set of operations (i.e. the URLs in one --next clause), appends them to the same file, separated by a blank line.\n\nIf --dump-header is provided several times, the last set value is used.\n\nExamples:\n\nSee also --output.",
+    "summary": "(HTTP FTP FILE) Write the received protocol headers to the specified file. If no headers are received, the use of this option creates an empty file. Specify \"-\" as filename (a single minus) to have it written to stdout.",
+    "description": "(HTTP FTP FILE) Write the received protocol headers to the specified file. If no headers are received, the use of this option creates an empty file. Specify \"-\" as filename (a single minus) to have it written to stdout.\n\nStarting in curl 8.10.0, specify \"%\" (a single percent sign) as filename writes the output to stderr.\n\nWhen used in FTP, the FTP server response lines are considered being \"headers\" and thus are saved there.\n\nWhen used on a FILE URL, curl outputs the file size and last modification time only.\n\nStarting in curl 8.11.0, using the --create-dirs option can also create missing directory components for the path provided in --dump-header.\n\nHaving multiple transfers in one set of operations (i.e. the URLs in one --next clause), appends them to the same file, separated by a blank line.\n\nIf --dump-header is provided several times, the last set value is used.\n\nExamples:\n\nSee also --output and --show-headers.",
     "choices": [],
     "examples": [
       "curl --dump-header store.txt https://example.com\ncurl --dump-header - https://example.com -o save"
     ],
     "addedIn": null,
     "seeAlso": [
-      "--output"
+      "--output",
+      "--show-headers"
     ]
   },
   {

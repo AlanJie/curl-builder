@@ -1049,9 +1049,10 @@ curl --dump-ca-embed
 </pre>
 <p class="level1">Added in 8.10.0. See also <a class="emphasis" href="#--ca-native">--ca-native</a>, <a class="emphasis" href="#--cacert">--cacert</a>, <a class="emphasis" href="#--capath">--capath</a>, <a class="emphasis" href="#--proxy-ca-native">--proxy-ca-native</a>, <a class="emphasis" href="#--proxy-cacert">--proxy-cacert</a> and <a class="emphasis" href="#--proxy-capath">--proxy-capath</a>. </p>
 <p class="level0"><a name="-D"></a><a name="--dump-header"></a><span class="nroffip">-D, --dump-header &lt;filename&gt;</span> </p>
-<p class="level1">(HTTP FTP) Write the received protocol headers to the specified file. If no headers are received, the use of this option creates an empty file. Specify &quot;-&quot; as filename (a single minus) to have it written to stdout. </p>
+<p class="level1">(HTTP FTP FILE) Write the received protocol headers to the specified file. If no headers are received, the use of this option creates an empty file. Specify &quot;-&quot; as filename (a single minus) to have it written to stdout. </p>
 <p class="level1">Starting in curl 8.10.0, specify &quot;%&quot; (a single percent sign) as filename writes the output to stderr. </p>
 <p class="level1">When used in FTP, the FTP server response lines are considered being &quot;headers&quot; and thus are saved there. </p>
+<p class="level1">When used on a FILE URL, curl outputs the file size and last modification time only. </p>
 <p class="level1">Starting in curl 8.11.0, using the <a class="emphasis" href="#--create-dirs">--create-dirs</a> option can also create missing directory components for the path provided in <a class="emphasis" href="#--dump-header">--dump-header</a>. </p>
 <p class="level1">Having multiple transfers in one set of operations (i.e. the URLs in one <a class="emphasis" href="#--next">--next</a> clause), appends them to the same file, separated by a blank line. </p>
 <p class="level1">If <a class="emphasis" href="#--dump-header">--dump-header</a> is provided several times, the last set value is used. </p>
@@ -1059,7 +1060,7 @@ curl --dump-ca-embed
 curl --dump-header store.txt https://example.com
 curl --dump-header - https://example.com -o save
 </pre>
-<p class="level1">See also <a class="emphasis" href="#--output">--output</a>. </p>
+<p class="level1">See also <a class="emphasis" href="#--output">--output</a> and <a class="emphasis" href="#--show-headers">--show-headers</a>. </p>
 <p class="level0"><a name="--ech"></a><span class="nroffip">--ech &lt;config&gt;</span> </p>
 <p class="level1">(HTTPS) Specify how to do ECH (Encrypted Client Hello). </p>
 <p class="level1">The values allowed for &lt;config&gt; can be: </p>
@@ -2841,9 +2842,10 @@ curl --show-error --silent https://example.com
 </pre>
 <p class="level1">See also <a class="emphasis" href="#--no-progress-meter">--no-progress-meter</a>. </p>
 <p class="level0"><a name="-i"></a><a name="--show-headers"></a><span class="nroffip">-i, --show-headers</span> </p>
-<p class="level1">(HTTP FTP) Show response headers in the output. HTTP response headers can include things like server name, cookies, date of the document, HTTP version and more. With non-HTTP protocols, the &quot;headers&quot; are other server communication. </p>
+<p class="level1">(HTTP FTP FILE) Show response headers in the output. HTTP response headers can include things like server name, cookies, date of the document, HTTP version and more. With non-HTTP protocols, the &quot;headers&quot; are other server communication. </p>
 <p class="level1">This option makes the response headers get saved in the same stream/output as the data. <a class="emphasis" href="#--dump-header">--dump-header</a> exists to save headers in a separate stream. </p>
 <p class="level1">When HTTP headers are output to a tty, curl may use escape codes to make the header field names appear in bold and URLs in &quot;Location:&quot; headers be especially marked as such. Disable the use of terminal escape codes with <span Class="emphasis">--no-styled-output</span>. (This means using the <a class="emphasis" href="#--styled-output">--styled-output</a> option with a &quot;<span Class="emphasis">--no-</span>&quot; prefix to disable it.) </p>
+<p class="level1">When used on a FILE URL, curl includes the file size and last modification time only. </p>
 <p class="level1">To view the request headers, consider the <a class="emphasis" href="#--verbose">--verbose</a> option. </p>
 <p class="level1">Prior to 7.75.0 curl did not print the headers if <a class="emphasis" href="#--fail">--fail</a> was used in combination with this option and there was an error reported by the server. </p>
 <p class="level1">This option was called <span Class="emphasis">--include</span> before 8.10.0. The previous name remains functional. </p>
