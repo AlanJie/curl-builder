@@ -2241,7 +2241,6 @@ curl -&#35; -O https://example.com
 <p class="level1"><a class="emphasis" href="#--proto">--proto</a> -all,https,+http only enables http and https </p>
 <p class="level1"><a class="emphasis" href="#--proto">--proto</a> =http,https also only enables http and https </p>
 <p class="level1">Unknown and disabled protocols produce a warning. This allows scripts to safely rely on being able to disable potentially dangerous protocols, without relying upon support for that protocol being built into curl to avoid an error. </p>
-<p class="level1">This option can be used multiple times, in which case the effect is the same as concatenating the protocols into one instance of the option. </p>
 <p class="level1">If <a class="emphasis" href="#--proto">--proto</a> is provided several times, the last set value is used. </p>
 <p class="level1">Example: </p><pre class="level1">
 curl --proto =http,https,sftp https://example.com
