@@ -759,7 +759,9 @@ curl --config file.txt https://example.com
 <p class="level0"><a name="--connect-timeout"></a><span class="nroffip">--connect-timeout &lt;seconds&gt;</span> </p>
 <p class="level1">Maximum time in seconds that you allow curl&apos;s connection to take. This only limits the connection phase, so if curl connects within the given period it continues - if not it exits. </p>
 <p class="level1">This option accepts decimal values. The decimal value needs to be provided using a dot (.) as decimal separator - not the local version even if it might be using another separator. </p>
-<p class="level1">The connection phase is considered complete when the DNS lookup and requested TCP, TLS or QUIC handshakes are done. </p>
+<p class="level1">The connection phase is usually considered complete when the DNS lookup and requested TCP, TLS or QUIC handshakes are done. </p>
+<p class="level1">For several protocols, this includes the authentication, but for HTTP it does not. HTTP is a request based protocol and authentication happens when the transfer starts. In FTP however, the authentication is part of the connect phase, because FTP authorization is part of the connection setup. </p>
+<p class="level1">WebSocket is a hybrid, using HTTP requests to establish a new connection that then no longer is HTTP. Since curl 8.24.0, the HTTP request to negotiate a WebSocket connection is part of the connect phase as well. </p>
 <p class="level1">If <a class="emphasis" href="#--connect-timeout">--connect-timeout</a> is provided several times, the last set value is used. </p>
 <p class="level1">Examples: </p><pre class="level1">
 curl --connect-timeout 20 https://example.com
