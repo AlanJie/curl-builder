@@ -4333,7 +4333,7 @@
     "category": "output",
     "popularity": 15,
     "summary": "Make curl perform all transfers in parallel as compared to the regular serial manner. Parallel transfer means that curl runs up to N concurrent transfers simultaneously and if there are more than N transfers to handle, it starts new ones when earlier transfers finish.",
-    "description": "Make curl perform all transfers in parallel as compared to the regular serial manner. Parallel transfer means that curl runs up to N concurrent transfers simultaneously and if there are more than N transfers to handle, it starts new ones when earlier transfers finish.\n\nWith parallel transfers, the progress meter output is different from when doing serial transfers, as it then displays the transfer status for multiple transfers in a single line.\n\nThe maximum amount of concurrent transfers is set with --parallel-max and it defaults to 50.\n\nThis option is global and does not need to be specified for each use of --next.\n\nProviding --parallel multiple times has no extra effect. Disable it again with --no-parallel.\n\nExample:\n\nAdded in 7.66.0. See also --next, --verbose, --parallel-max and --parallel-immediate.",
+    "description": "Make curl perform all transfers in parallel as compared to the regular serial manner. Parallel transfer means that curl runs up to N concurrent transfers simultaneously and if there are more than N transfers to handle, it starts new ones when earlier transfers finish.\n\nWith parallel transfers, the progress meter output is different from when doing serial transfers, as it then displays the transfer status for multiple transfers in a single line.\n\nThe maximum amount of concurrent transfers is set with --parallel-max and it defaults to 50.\n\nWhen one or more parallel transfers fail, curl continues performing the remaining transfers (unless --fail-early is used) and exits with the error code of the first failed transfer. This differs from serial transfers, where the exit code is determined by the last transfer unless --fail-early is used.\n\nThis option is global and does not need to be specified for each use of --next.\n\nProviding --parallel multiple times has no extra effect. Disable it again with --no-parallel.\n\nExample:\n\nAdded in 7.66.0. See also --next, --verbose, --parallel-max, --parallel-immediate and --fail-early.",
     "choices": [],
     "examples": [
       "curl --parallel https://example.com -o file1 https://example.com -o file2"
@@ -4343,7 +4343,8 @@
       "--next",
       "--verbose",
       "--parallel-max",
-      "--parallel-immediate"
+      "--parallel-immediate",
+      "--fail-early"
     ]
   },
   {

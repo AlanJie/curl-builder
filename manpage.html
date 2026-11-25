@@ -546,8 +546,8 @@ https://example.com/
 <p class="level1">Using the mail reading protocol, curl can download emails for you. With or without using TLS. </p>
 <p class="level0"><a name="LDAPS"></a><span class="nroffip">LDAP(S)</span> </p>
 <p class="level1">curl can do directory lookups for you, with or without TLS. </p>
-<p class="level0"><a name="MQTT"></a><span class="nroffip">MQTT</span> </p>
-<p class="level1">curl supports MQTT version 3. Downloading over MQTT equals subscribing to a topic while uploading/posting equals publishing on a topic. MQTT over TLS is not supported (yet). </p>
+<p class="level0"><a name="MQTTS"></a><span class="nroffip">MQTT(S)</span> </p>
+<p class="level1">curl supports MQTT(S) version 3. Downloading over MQTT equals subscribing to a topic while uploading/posting equals publishing on a topic. </p>
 <p class="level0"><a name="POP3S"></a><span class="nroffip">POP3(S)</span> </p>
 <p class="level1">Downloading from a pop3 server means getting an email. With or without using TLS. </p>
 <p class="level0"><a name="RTSP"></a><span class="nroffip">RTSP</span> </p>
@@ -2128,12 +2128,13 @@ curl --output-dir &quot;tmp&quot; -o filename.html https://example.com
 <p class="level1">Make curl perform all transfers in parallel as compared to the regular serial manner. Parallel transfer means that curl runs up to N concurrent transfers simultaneously and if there are more than N transfers to handle, it starts new ones when earlier transfers finish. </p>
 <p class="level1">With parallel transfers, the progress meter output is different from when doing serial transfers, as it then displays the transfer status for multiple transfers in a single line. </p>
 <p class="level1">The maximum amount of concurrent transfers is set with <a class="emphasis" href="#--parallel-max">--parallel-max</a> and it defaults to 50. </p>
+<p class="level1">When one or more parallel transfers fail, curl continues performing the remaining transfers (unless <a class="emphasis" href="#--fail-early">--fail-early</a> is used) and exits with the error code of the first failed transfer. This differs from serial transfers, where the exit code is determined by the last transfer unless <a class="emphasis" href="#--fail-early">--fail-early</a> is used. </p>
 <p class="level1">This option is global and does not need to be specified for each use of <a class="emphasis" href="#--next">--next</a>. </p>
 <p class="level1">Providing <a class="emphasis" href="#--parallel">--parallel</a> multiple times has no extra effect. Disable it again with --no-parallel. </p>
 <p class="level1">Example: </p><pre class="level1">
 curl --parallel https://example.com -o file1 https://example.com -o file2
 </pre>
-<p class="level1">Added in 7.66.0. See also <a class="emphasis" href="#--next">--next</a>, <a class="emphasis" href="#--verbose">--verbose</a>, <a class="emphasis" href="#--parallel-max">--parallel-max</a> and <a class="emphasis" href="#--parallel-immediate">--parallel-immediate</a>. </p>
+<p class="level1">Added in 7.66.0. See also <a class="emphasis" href="#--next">--next</a>, <a class="emphasis" href="#--verbose">--verbose</a>, <a class="emphasis" href="#--parallel-max">--parallel-max</a>, <a class="emphasis" href="#--parallel-immediate">--parallel-immediate</a> and <a class="emphasis" href="#--fail-early">--fail-early</a>. </p>
 <p class="level0"><a name="--parallel-immediate"></a><span class="nroffip">--parallel-immediate</span> </p>
 <p class="level1">When doing parallel transfers, this option instructs curl to prefer opening up more connections in parallel at once rather than waiting to see if new transfers can be added as multiplexed streams on another connection. </p>
 <p class="level1">By default, without this option set, curl prefers to wait a little and multiplex new transfers over existing connections. It keeps the number of connections low at the expense of risking a slightly slower transfer startup. </p>
